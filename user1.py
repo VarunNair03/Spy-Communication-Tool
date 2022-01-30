@@ -16,7 +16,7 @@ class User1:
         self.send_message.place(x=20,y=70)
         self.send_message_input = Entry(self.root,font=LABEL_FONT,relief=FLAT,borderwidth=5,width=32)
         self.send_message_input.place(x=20,y=120)
-        self.send_button = Button(self.root,text="Send",font=BUTTON_FONT,bg=BUTTON_COLOR,fg="WHITE",relief=FLAT, padx=12,command=self.encryption_Delay).place(x=70,y=170)
+        self.send_button = Button(self.root,text="Send",font=BUTTON_FONT,bg=BUTTON_COLOR,fg="WHITE",relief=FLAT, padx=12,command=self.encryption).place(x=70,y=170)
 
         self.recieved_message = Label(self.root,text="Recieved Message",font=HEADER,bg=BACKGROUND_COLOR)
         self.recieved_message.place(x=20,y=210)
@@ -26,19 +26,12 @@ class User1:
         self.recieve_button = Button(self.root,text="Recieve",font=BUTTON_FONT,bg=BUTTON_COLOR,fg="WHITE",relief=FLAT, padx=12,command= self.decrypt).place(x=70,y=415)
         User2().start()
 
-    def encryption_Delay(self):
-        self.span.config(text="Encrypting Data: ")
-        self.encryption()
-
-
-
     def encryption(self):
         msg = self.send_message_input.get().strip()
 
         with open('message_from_user1.txt','wb') as file:
             encodede_message = encrypt_message(msg)
             file.write(encodede_message)
-
         print("Encrypted Message Sent")
 
 
